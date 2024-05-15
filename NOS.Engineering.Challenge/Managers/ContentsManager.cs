@@ -36,4 +36,22 @@ public class ContentsManager : IContentsManager
     {
         return _database.Delete(id);
     }
+
+    public Task<Guid> AddGenres(Guid id, IEnumerable<string> genre)
+    {
+        ContentDto d = _database.Read(id);
+        IEnumerable<string> aux = d.GenreList.get(genre);
+        aux.add(genre);
+        d.GenreList.set(genre);
+        return _database.Update(id,d);
+    }
+
+    public Task<Guid> RemoveGenres(Guid id, IEnumerable<string> genre)
+    {
+        ContentDto d = _database.Read(id);
+        IEnumerable<string> aux = d.GenreList.get(genre);
+        aux.delete(genre);
+        d.GenreList.set(genre);
+        return _database.Update(id,d);
+    }
 }

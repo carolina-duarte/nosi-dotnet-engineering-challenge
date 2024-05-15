@@ -73,7 +73,8 @@ public class ContentController : Controller
         [FromBody] IEnumerable<string> genre
     )
     {
-        return Task.FromResult<IActionResult>(StatusCode((int)HttpStatusCode.NotImplemented));
+        var addGenres =  _manager.addGenres(id, genre);
+        return OK(addGenres);
     }
     
     [HttpDelete("{id}/genre")]
@@ -82,6 +83,8 @@ public class ContentController : Controller
         [FromBody] IEnumerable<string> genre
     )
     {
-        return Task.FromResult<IActionResult>(StatusCode((int)HttpStatusCode.NotImplemented));
+        var removeGenres =  _manager.RemoveGenres(id, genre);
+        return OK(addGenres);
     }
+
 }
